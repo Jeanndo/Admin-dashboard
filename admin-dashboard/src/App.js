@@ -1,12 +1,10 @@
 import './App.css';
-import SidebarNestedList from './components/Dashboard/Sidebar/mainListItems ';
-import Dashboard from './components/Dashboard/Layout/Layout';
-
+import Users from './components/Users/Users';
 const App = () =>{
   return (
-    <div className="App">
-   <Dashboard/>
-    </div>
+    <div className='App'>
+     <Users/>
+     </div>
   );
 }
 
