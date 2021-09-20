@@ -1,4 +1,4 @@
-import React,{useState}from 'react'
+import React,{Component, useState}from 'react'
 import clsx from 'clsx';
 import { makeStyles,useTheme} from '@material-ui/core/styles'
 import Sidebar from '../Sidebar/mainListItems ';
@@ -53,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
     drawer:{
     width:drawerWidth,
     flexShrink:0,
+    marginTop:'600px'
     },
     drawerPaper: {
     //   position: 'relative',
@@ -121,11 +122,9 @@ const useStyles = makeStyles((theme) => ({
     //   height: 240,
     // },
   }))
-
-const Layout = (props) => {
+function PersistentDrawerLeft(props){
 
     const classes = useStyles();
-    const theme = useTheme();
     const [open,setOpen]= useState(false);
 
     const handleDrawerOpen = ()=>{
@@ -135,22 +134,14 @@ const Layout = (props) => {
     const handleDrawerClose = ()=>{
         setOpen(false);
     }
-   
     return (
-        <div className={classes.root}>
+      <div className={classes.root}>
           <CssBaseline/>  
-            {/* <AppBar
-            position="fixed"
-            className={clsx(classes.AppBar,{
-             [classes.AppBar]:open, 
-            })}
-            > */}
             <Header
               classes={classes}
               sidebarIsOpened={open}
               onClick={handleDrawerOpen}
             />
-            {/* </AppBar> */}
             <Sidebar
              open={open}
              onClose={handleDrawerClose}
@@ -167,6 +158,15 @@ const Layout = (props) => {
             </main>
         </div>
     )
+  }
+
+export default class Layout extends Component {
+   render(){
+      return (
+         <PersistentDrawerLeft>
+           {this.props.children}
+         </PersistentDrawerLeft>
+      )
+   }
 }
 
-export default Layout
